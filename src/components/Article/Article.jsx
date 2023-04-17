@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Highlight from './Highlight';
+import Highlight from '../Highlight/Highlight';
 
 function Article({ text, highlights, onHighlightClick }) {
   const splitText = text.split(/(\s+)/);
