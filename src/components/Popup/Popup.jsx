@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Article from '../Article/Article';
 import HighlightsList from '../HighlightsList/HightlightsList';
 import HighlightTooltip from '../HighlightTooltip/HighlightTooltip';
 
@@ -41,6 +42,7 @@ function Popup() {
   return (
     <div>
       <h1>Article Summary</h1>
+      <Article text={text} highlights={highlights} onHighlightClick={handleSelection} />
       <HighlightsList highlights={highlights} onHighlightClick={handleHighlightClick} />
       {showTooltip && <HighlightTooltip text={tooltipText} tags={tooltipTags} onClose={handleTooltipClose} />}
     </div>
