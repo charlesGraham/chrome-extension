@@ -41,7 +41,6 @@ function Popup() {
   return (
     <div>
       <h1>Article Summary</h1>
-      <Article handleSelection={handleSelection} onHighlightClick={handleHighlightClick} />
       <HighlightsList highlights={highlights} onHighlightClick={handleHighlightClick} />
       {showTooltip && <HighlightTooltip text={tooltipText} tags={tooltipTags} onClose={handleTooltipClose} />}
     </div>
