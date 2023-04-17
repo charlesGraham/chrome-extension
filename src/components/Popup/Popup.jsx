@@ -1,28 +1,50 @@
-import React, { useState } from 'react';
-import './Popup.css';
+import React, { useState, useEffect } from 'react';
+import Article from './Article';
+import HighlightsList from './HighlightsList';
+import HighlightTooltip from './HighlightTooltip';
 
 function Popup() {
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [highlights, setHighlights] = useState([]);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipText, setTooltipText] = useState('');
+  const [tooltipTags, setTooltipTags] = useState([]);
 
-  const handleToggle = () => {
-    setIsEnabled(!isEnabled);
-    // Call a function here to enable or disable the extension
+  const handleSelection = () => {
+    const selection = window.getSelection().toString();
+    if (selection) {
+      setHighlights([...highlights, selection]);
+    }
   };
 
-  const handleGetSummary = () => {
-    //TODO: Call to OpenAI to get summary
-    console.log("Getting summary...");
-  }
+  const handleHighlightClick = (highlight, tags) => {
+    setTooltipText(highlight);
+    setTooltipTags(tags);
+    setShowTooltip(true);
+  };
+
+  const handleTooltipClose = () => {
+    setShowTooltip(false);
+  };
+
+  useEffect(() => {
+    const handleMouseUp = () => {
+      const selection = window.getSelection().toString();
+      if (selection) {
+        handleHighlightClick(selection, []);
+      }
+    };
+    document.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
 
   return (
-    <div className="content_container">
-      <h1 className="popup_title">Article Summary</h1>
-      <p className="selected_text">Selected text: <span id="selectedText"></span></p>
-      <div className="buttons_container">
-        <button id="summaryButton" onClick={handleGetSummary}>Get summary</button>
-        <button onClick={handleToggle}>{isEnabled ? 'Disable' : 'Enable'}</button>
-      </div>
-
+    <div>
+      <h1>Article Summary</h1>
+      <Article handleSelection={handleSelection} onHighlightClick={handleHighlightClick} />
+      <HighlightsList highlights={highlights} onHighlightClick={handleHighlightClick} />
+      {showTooltip && <HighlightTooltip text={tooltipText} tags={tooltipTags} onClose={handleTooltipClose} />}
     </div>
   );
 }
