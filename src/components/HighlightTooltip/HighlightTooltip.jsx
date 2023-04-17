@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './ToolTip.css';
+import './HighlightTooltip.css';
 
 function HighlightTooltip({ text, summary, tags }) {
   return (
