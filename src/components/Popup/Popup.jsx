@@ -13,13 +13,16 @@ function Popup() {
     //TODO: Call to OpenAI to get summary
     console.log("Getting summary...");
   }
-  
+
   return (
-    <div>
+    <div className="content_container">
       <h1 className="popup_title">Article Summary</h1>
       <p className="selected_text">Selected text: <span id="selectedText"></span></p>
-      <button id="summaryButton" onClick={handleGetSummary}>Get summary</button>
-      <button onClick={handleToggle}>{isEnabled ? 'Disable' : 'Enable'}</button>
+      <div className="buttons_container">
+        <button id="summaryButton" onClick={handleGetSummary}>Get summary</button>
+        <button onClick={handleToggle}>{isEnabled ? 'Disable' : 'Enable'}</button>
+      </div>
+
     </div>
   );
 }
