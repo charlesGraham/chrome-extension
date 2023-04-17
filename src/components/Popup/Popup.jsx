@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Article from './Article';
 import HighlightsList from '../HighlightsList/HightlightsList';
 import HighlightTooltip from '../HighlightTooltip/HighlightTooltip';
 
